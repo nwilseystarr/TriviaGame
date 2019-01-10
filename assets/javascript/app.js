@@ -2,8 +2,8 @@
 $(document).ready(function () {
 
     var currentQ 
-    var correctAnswer = [];
-    var incorrectAnswer = [];
+    var correctAnswer = 0;
+    var incorrectAnswer = 0;
     var total = [];
     var time = 0;
     var index = -1;
@@ -26,6 +26,8 @@ $(document).ready(function () {
     };
     
     function quiz() {
+        $(".questions-page").show()
+        $(".answer-page").hide()
         clearInterval(intervalId);
         time = 15;
         intervalId = setInterval(decrement, 1000);
@@ -40,7 +42,7 @@ $(document).ready(function () {
             currentChoices.appendTo("#choices");
         };
     };
-
+        //============================User Choices============================
     // If user does not answer within 30secs, call the qtimer (question timer) function
     function qTimer() {
         incorrectAnswer++;
@@ -49,80 +51,70 @@ $(document).ready(function () {
         $("#total").html("Total: " + total);
         clearInterval(intervalId);
         timesUp();
-        // quiz();
     };
 
     //onclick even to grab the choice 
     $(document).on("click", ".btn-choice", function choices() {
         //checks if correct
         if ($(this).text() === currentQ.correct) {
-            
             //adds to the number of correct answers
             correctAnswer++;
+            //adds to the total number of questions answered here
             total++;
             //displays the number of correct answers here
             $("#correct").html("Correct: " + correctAnswer);
+            //displays the progress here
             $("#total").html("Progress " + total + "/" + questions.length);
-            //clears the timer
-            // clearInterval(intervalId);
-            //check if ended
-            // isEnded();
+            //calls the correct function to change slides
             correct ();
 
         } else if ($(this).text() !== currentQ.correct) {
-            
             //adds to the number of incorrect answers
             incorrectAnswer++;
+            //adds to the total number of questions answered here
             total++;
             //displays the number of incorrect answers here
             $("#incorrect").html("Incorrect: " + incorrectAnswer);
+            //displays the progress here
             $("#total").html("Progress " + total + "/" + questions.length);
-            // clearInterval(intervalId);
-            // isEnded();
+            //calls the incorrect function to change slides
             incorrect ();
         };
     });
     //============================Answer Screens============================ 
     //if correct call this function 
         function correct (){
-            alert("Correct!");
-        // $(".questions-page").empty()
-        // //display "Correct!" text 
-        // $(".questions-page").append("<h2> Correct! </h2>");
-        // //create a timer of 10 seconds 
-        // setTimeout(function(){$(".questions-page").empty()}, 10000);
-        //display total score
-        isEnded();
-        //Nice to have: display image or gif
-        // console.log(time);
+        clearInterval(intervalId);
+        $(".questions-page").hide()
+        $(".answer-page").show()
+        $(".answer-page").html("<h2> Correct! </h2>");
+//change timer to 10 seconds
+        setTimeout(isEnded, 3000);
+        console.log(time)
         };    
+
     //if incorrect call this function 
     function incorrect (){
-            alert("Incorrect!");
-        // $(".questions-page").empty()
-        // //display "Incorrect!" text 
-        // $(".questions-page").append("<h2> Wrong Answer! </h2>");
-        // //create a timer of 10 seconds 
-        // setTimeout(function(){$(".questions-page").empty()}, 10000);
-        //display total score
-        isEnded();
-        //Nice to have: display image or gif
-        // console.log(time);
-        };    
+        clearInterval(intervalId);
+        $(".questions-page").hide()
+        console.log(currentQ.correct);
+        $(".answer-page").show()
+        $(".answer-page").html("<h2> Wrong! </h2>" + "The correct answer was "+ "<strong>" + currentQ.correct + "</strong>");
+//change timer to 10 seconds
+        setTimeout(isEnded, 3000);
+        console.log(time)
+        };      
 
     // //if didn't answer in time, call this function
     function timesUp (){
-            alert("Times Up!");
-    //     // $(".questions-page").empty()
-    //     // //display "Times Up!" text 
-    //     // $(".questions-page").append("<h2> Times Up! </h2>");
-    //     // //create a timer of 10 seconds 
-    //     // setTimeout(function(){$(".questions-page").empty()}, 10000);
-    //     //display total score
-            isEnded();
-    //     //Nice to have: display image or gif
-    //     console.log(time);
-        };    
+        clearInterval(intervalId);
+        $(".questions-page").hide()
+        $(".answer-page").show()
+        $(".answer-page").html("<h2> You didn't answer in time! </h2>" + "The correct answer was "+ "<strong>" + currentQ.correct + "</strong>");
+//change timer to 10 seconds
+        setTimeout(isEnded, 3000);
+        console.log(time)
+        };       
 
     //============================Checks if Game has Ended============================ 
 
@@ -138,10 +130,9 @@ $(document).ready(function () {
     // // ============================Game End Screen============================ 
     function endGame() {
         clearInterval(intervalId);
+        $(".questions-page").hide()
+        $(".answer-page").hide()
         $("#start-btn").hide();
-        $("#choices").hide();
-        $("#question").hide();
-        $("#questionTimer").hide();
         $("#final-text").html("<h3> All Done, Here's how you did: </h3>")
         $("#correct").html("Correct: " + correctAnswer);
         $("#incorrect").html("Incorrect: " + incorrectAnswer);
