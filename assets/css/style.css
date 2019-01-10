@@ -1,2 +1,14 @@
 /*Stylesheet*/
 
+body{
+    font-family: 'Cormorant Garamond', serif;
+    background-image: url(../images/background.png);
+}
+
+.container{
+    border: solid 5px black;
+    text-align: center;
+    padding: 10px;
+    max-width: 50%;
+    margin-top: 15%;
+}

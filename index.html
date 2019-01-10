@@ -6,34 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Trivia Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="reset stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+    <link rel="reset stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <!--jQuery Link-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/javascript/app.js"></script>
 </head>
 
 <body>
-    <h2>Harry Potter Trivia</h2>
-    <!--Start Page-->
-    <div id="Start"></div>
-    <button id="start-btn" type="button" class="btn btn-light">Start</button>
+    <div class="container">
+        <h2>Harry Potter Trivia</h2>
+        <!--Start Page-->
+        <div id="Start"></div>
+        <button id="start-btn" type="button" class="btn btn-light">Start</button>
 
-    <!--Question Page-->
-    <div id="questionTimer"></div>
-    <div id="question"></div>
-    <div id="choices"></div>
-    <!-- <button id="submit-btn" type="button" class="btn btn-light">Submit</button>    -->
-    
+        <!--Question Page-->
+        <div class="questions-page">
+            <div id="questionTimer"></div>
+            <div id="question"></div>
+            <div id="choices"></div>
+        </div>
+        <!-- <button id="submit-btn" type="button" class="btn btn-light">Submit</button>    -->
 
-    <!--Answer Page-->
-    <div id="correct"></div>
-    <div id="incorrect"></div>
-    <div id="unanswered"></div>
-    <!-- <button id="try-again-btn" type="button" class="btn btn-light"></button>     -->
 
+        <!--Answer Page-->
+        <div class="answer-page">
+            <div id="final-text"></div>
+            <div id="correct"></div>
+            <div id="incorrect"></div>
+            <div id="total"></div>
+        </div>
+        <!-- <button id="try-again-btn" type="button" class="btn btn-light"></button>     -->
+    </div>
 </body>
 
 </html>
