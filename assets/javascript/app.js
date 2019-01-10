@@ -1,7 +1,9 @@
 //Javascript goes here\
 $(document).ready(function () {
 
-    var currentQ 
+    $("#try-again-btn").hide();
+
+    var currentQ
     var correctAnswer = 0;
     var incorrectAnswer = 0;
     var total = [];
@@ -15,16 +17,36 @@ $(document).ready(function () {
         total = 0;
         isEnded();
     });
-    
+
+    //reset
+    $("#try-again-btn").on("click", function () {
+        $("#try-again-btn").hide();
+        reset();
+    });
+
+    function reset() {
+        index = -1;
+        correctAnswer = 0;
+        incorrectAnswer = 0;
+        total = 0;
+        time = 0;
+        $("#final-text").hide();
+        $("#correct").html("Correct: " + correctAnswer);
+        $("#incorrect").html("Incorrect: " + incorrectAnswer);
+        $("#total").html("Progress " + total + "/" + questions.length);
+        quiz();
+    };
+
+
     // Function to decrement timer by 1 second, and to call the qtimer event if run out of time
-    function decrement(){
+    function decrement() {
         time--;
         $("#questionTimer").html(time);
-        if (time === 0){
+        if (time === 0) {
             qTimer();
         }
     };
-    
+
     function quiz() {
         $(".questions-page").show()
         $(".answer-page").hide()
@@ -42,13 +64,13 @@ $(document).ready(function () {
             currentChoices.appendTo("#choices");
         };
     };
-        //============================User Choices============================
+    //============================User Choices============================
     // If user does not answer within 30secs, call the qtimer (question timer) function
     function qTimer() {
         incorrectAnswer++;
         total++;
         $("#incorrect").html("Incorrect: " + incorrectAnswer);
-        $("#total").html("Total: " + total);
+        $("#total").html("Progress " + total + "/" + questions.length);
         clearInterval(intervalId);
         timesUp();
     };
@@ -66,7 +88,7 @@ $(document).ready(function () {
             //displays the progress here
             $("#total").html("Progress " + total + "/" + questions.length);
             //calls the correct function to change slides
-            correct ();
+            correct();
 
         } else if ($(this).text() !== currentQ.correct) {
             //adds to the number of incorrect answers
@@ -78,50 +100,50 @@ $(document).ready(function () {
             //displays the progress here
             $("#total").html("Progress " + total + "/" + questions.length);
             //calls the incorrect function to change slides
-            incorrect ();
+            incorrect();
         };
     });
     //============================Answer Screens============================ 
     //if correct call this function 
-        function correct (){
+    function correct() {
         clearInterval(intervalId);
         $(".questions-page").hide()
         $(".answer-page").show()
         $(".answer-page").html("<h2> Correct! </h2>");
-//change timer to 10 seconds
+        //change timer to 10 seconds
         setTimeout(isEnded, 3000);
         console.log(time)
-        };    
+    };
 
     //if incorrect call this function 
-    function incorrect (){
+    function incorrect() {
         clearInterval(intervalId);
         $(".questions-page").hide()
         console.log(currentQ.correct);
         $(".answer-page").show()
-        $(".answer-page").html("<h2> Wrong! </h2>" + "The correct answer was "+ "<strong>" + currentQ.correct + "</strong>");
-//change timer to 10 seconds
+        $(".answer-page").html("<h2> Wrong! </h2>" + "The correct answer was " + "<strong>" + currentQ.correct + "</strong>");
+        //change timer to 10 seconds
         setTimeout(isEnded, 3000);
         console.log(time)
-        };      
+    };
 
     // //if didn't answer in time, call this function
-    function timesUp (){
+    function timesUp() {
         clearInterval(intervalId);
         $(".questions-page").hide()
         $(".answer-page").show()
-        $(".answer-page").html("<h2> You didn't answer in time! </h2>" + "The correct answer was "+ "<strong>" + currentQ.correct + "</strong>");
-//change timer to 10 seconds
+        $(".answer-page").html("<h2> You didn't answer in time! </h2>" + "The correct answer was " + "<strong>" + currentQ.correct + "</strong>");
+        //change timer to 10 seconds
         setTimeout(isEnded, 3000);
         console.log(time)
-        };       
+    };
 
     //============================Checks if Game has Ended============================ 
 
     function isEnded() {
         if (total < (questions.length)) {
             quiz();
-        } 
+        }
         if (total == (questions.length)) {
             endGame();
         };
@@ -133,10 +155,12 @@ $(document).ready(function () {
         $(".questions-page").hide()
         $(".answer-page").hide()
         $("#start-btn").hide();
+        $("#final-text").show();
         $("#final-text").html("<h3> All Done, Here's how you did: </h3>")
         $("#correct").html("Correct: " + correctAnswer);
         $("#incorrect").html("Incorrect: " + incorrectAnswer);
         $("#total").html("Progress " + total + "/" + questions.length);
+        $("#try-again-btn").show();
     };
 
     //============================Questions============================         
@@ -159,6 +183,6 @@ $(document).ready(function () {
         choices: ["Keeper", "Beater", "Seeker", "Chaser"],
         correct: "Seeker",
     },
-    ];        
+    ];
 
 });
