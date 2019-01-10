@@ -5,9 +5,9 @@ $(document).ready(function () {
     var correctAnswer = [];
     var incorrectAnswer = [];
     var total = [];
-    // var time = 0;
+    var time = 0;
     var index = -1;
-    // var intervalId;
+    var intervalId;
 
     //Start button 
     $("#start-btn").on("click", function () {
@@ -16,19 +16,19 @@ $(document).ready(function () {
         isEnded();
     });
     
-    //Function to decrement timer by 1 second, and to call the qtimer event if run out of time
-    // function decrement(){
-    //     time--;
-    //     $("#questionTimer").html(time);
-    //     if (time === 0){
-    //         qTimer();
-    //     }
-    // };
+    // Function to decrement timer by 1 second, and to call the qtimer event if run out of time
+    function decrement(){
+        time--;
+        $("#questionTimer").html(time);
+        if (time === 0){
+            qTimer();
+        }
+    };
     
     function quiz() {
-        // clearInterval(intervalId);
-        // time = 15;
-        // intervalId = setInterval(decrement, 1000);
+        clearInterval(intervalId);
+        time = 15;
+        intervalId = setInterval(decrement, 1000);
         $("#choices").empty();
         index++;
         currentQ = questions[index];
@@ -41,16 +41,16 @@ $(document).ready(function () {
         };
     };
 
-    //If user does not answer within 30secs, call the qtimer (question timer) function
-    // function qTimer() {
-    //     incorrectAnswer++;
-    //     total++;
-    //     $("#incorrect").html("Incorrect: " + incorrectAnswer);
-    //     $("#total").html("Total: " + total);
-    //     clearInterval(intervalId);
-    //     timesUp();
-    //     // quiz();
-    // };
+    // If user does not answer within 30secs, call the qtimer (question timer) function
+    function qTimer() {
+        incorrectAnswer++;
+        total++;
+        $("#incorrect").html("Incorrect: " + incorrectAnswer);
+        $("#total").html("Total: " + total);
+        clearInterval(intervalId);
+        timesUp();
+        // quiz();
+    };
 
     //onclick even to grab the choice 
     $(document).on("click", ".btn-choice", function choices() {
@@ -111,18 +111,18 @@ $(document).ready(function () {
         };    
 
     // //if didn't answer in time, call this function
-    // function timesUp (){
-    //         alert("Times Up!");
+    function timesUp (){
+            alert("Times Up!");
     //     // $(".questions-page").empty()
     //     // //display "Times Up!" text 
     //     // $(".questions-page").append("<h2> Times Up! </h2>");
     //     // //create a timer of 10 seconds 
     //     // setTimeout(function(){$(".questions-page").empty()}, 10000);
     //     //display total score
-    //     quiz();
+            isEnded();
     //     //Nice to have: display image or gif
     //     console.log(time);
-    //     };    
+        };    
 
     //============================Checks if Game has Ended============================ 
 
@@ -137,9 +137,11 @@ $(document).ready(function () {
 
     // // ============================Game End Screen============================ 
     function endGame() {
+        clearInterval(intervalId);
         $("#start-btn").hide();
         $("#choices").hide();
         $("#question").hide();
+        $("#questionTimer").hide();
         $("#final-text").html("<h3> All Done, Here's how you did: </h3>")
         $("#correct").html("Correct: " + correctAnswer);
         $("#incorrect").html("Incorrect: " + incorrectAnswer);
