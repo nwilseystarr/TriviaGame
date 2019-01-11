@@ -197,7 +197,7 @@ $(document).ready(function () {
     }, {
         question: "What is the last Horcrux that is destroyed?",
         choices: ["Nagini", "The Ring", "Harry Potter", "Diadem"],
-        correct: "Seven",        
+        correct: "Nagini",        
     }, 
     ];
 
