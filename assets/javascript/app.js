@@ -179,10 +179,26 @@ $(document).ready(function () {
         choices: ["Hufflepuff", "Gryffindor", "Ravenclaw", "Slytherin"],
         correct: "Gryffindor",
     }, {
-        question: "What position does Harry plan on his Quidditch team?",
-        choices: ["Keeper", "Beater", "Seeker", "Chaser"],
+        question: "What position does Harry play on his Quidditch team?",
+        choices: ["Keeper", "Beater", "Chaser", "Seeker"],
         correct: "Seeker",
-    },
+    }, {
+        question: "Who is Harry Potter's godfather?",
+        choices: ["Sirus Black", "Remus Lupin", "Severus Snape", "Peter Pettigrew"],
+        correct: "Sirus Black",
+    }, {
+        question: "What form does Harry's patronus take?",
+        choices: ["Otter", "Stag", "Weasel", "Doe"],
+        correct: "Stag",
+    }, {
+        question: "How many children do the Weasleys have?",
+        choices: ["Six", "Seven", "Eight", "Nine"],
+        correct: "Seven",
+    }, {
+        question: "What is the last Horcrux that is destroyed?",
+        choices: ["Nagini", "The Ring", "Harry Potter", "Diadem"],
+        correct: "Seven",        
+    }, 
     ];
 
 });
