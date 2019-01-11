@@ -18,7 +18,7 @@ $(document).ready(function () {
         isEnded();
     });
 
-    //reset
+    //reset function
     $("#try-again-btn").on("click", function () {
         $("#try-again-btn").hide();
         reset();
@@ -47,11 +47,12 @@ $(document).ready(function () {
         }
     };
 
+    //Quiz Function
     function quiz() {
         $(".questions-page").show()
         $(".answer-page").hide()
         clearInterval(intervalId);
-        time = 15;
+        time = 30;
         intervalId = setInterval(decrement, 1000);
         $("#choices").empty();
         index++;
@@ -110,21 +111,16 @@ $(document).ready(function () {
         $(".questions-page").hide()
         $(".answer-page").show()
         $(".answer-page").html("<h2> Correct! </h2>");
-        //change timer to 10 seconds
-        setTimeout(isEnded, 3000);
-        console.log(time)
+        setTimeout(isEnded, 5000);
     };
 
     //if incorrect call this function 
     function incorrect() {
         clearInterval(intervalId);
-        $(".questions-page").hide()
-        console.log(currentQ.correct);
+        $(".questions-page").hide();
         $(".answer-page").show()
         $(".answer-page").html("<h2> Wrong! </h2>" + "The correct answer was " + "<strong>" + currentQ.correct + "</strong>");
-        //change timer to 10 seconds
-        setTimeout(isEnded, 3000);
-        console.log(time)
+        setTimeout(isEnded, 5000);
     };
 
     // //if didn't answer in time, call this function
@@ -133,9 +129,7 @@ $(document).ready(function () {
         $(".questions-page").hide()
         $(".answer-page").show()
         $(".answer-page").html("<h2> You didn't answer in time! </h2>" + "The correct answer was " + "<strong>" + currentQ.correct + "</strong>");
-        //change timer to 10 seconds
-        setTimeout(isEnded, 3000);
-        console.log(time)
+        setTimeout(isEnded, 5000);
     };
 
     //============================Checks if Game has Ended============================ 
